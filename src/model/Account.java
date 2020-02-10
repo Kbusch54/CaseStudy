@@ -1,74 +1,91 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
 /**
- * The persistent class for the account database table.
+ * The persistent class for the ACCOUNT database table.
  * 
  */
 @Entity
-@NamedQueries(value = {
-		@NamedQuery(name = "findAllAcc", query = "SELECT a FROM Account a"),
-		@NamedQuery(name= "accBioPage", query="Select a.bio , a.email, a.fName, a.lName, a.email, a.picture, a.userName From Account a where a.userName = :name")})
-
+@Table(name="ACCOUNT")
+@NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(unique=true, nullable=false)
+	private long id;
 
+
+	@Column(length=255)
 	private String bio;
 
-	@Column(name = "date_Added")
-	private Timestamp dateAdded;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="date_Added")
+	private Date dateAdded;
 
 	private String email;
-	
-	private String picture;
 
-	
-	@Column(name = "first_Name")
+	@Column(name="first_Name")
 	private String fName;
 
-	@Column(name = "is_Admin")
-	private boolean admin;
+	@Column(name="is_Admin")
+	private boolean isAdmin;
 
-	@Column(name = "last_Name")
+
+	@Column(name="last_Name")
 	private String lName;
 
+
+	@Column(nullable=false, length=255)
 	private String password;
 
-	@Column(name = "user_Name")
+	@Column(length=255)
+	private String picture;
+
+	@Column(nullable=false, name="user_Name")
 	private String userName;
 
-	// bi-directional many-to-one association to Alcohol
-	@OneToMany(mappedBy = "account")
+
+	//bi-directional many-to-one association to Alcohol
+	@OneToMany(mappedBy="account")
 	private List<Alcohol> alcohols;
 
-	// bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy = "account")
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="account")
 	private List<Comment> comments;
 
-	// bi-directional many-to-one association to Like
-	@OneToMany(mappedBy = "account")
+	//bi-directional many-to-one association to Like
+	@OneToMany(mappedBy="account")
 	private List<Like> likes;
 
-	// bi-directional many-to-one association to Star
-	@OneToMany(mappedBy = "account")
+	//bi-directional many-to-one association to Star
+	@OneToMany(mappedBy="account")
 	private List<Star> stars;
 
 	public Account() {
 	}
 
-	public Long getId() {
-		return id;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -76,15 +93,18 @@ public class Account implements Serializable {
 		return this.bio;
 	}
 
+
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
 
-	public Timestamp getDate_Added() {
+
+
+	public Date getDate_Added() {
 		return this.dateAdded;
 	}
 
-	public void setDate_Added(Timestamp date_Added) {
+	public void setDate_Added(Date date_Added) {
 		this.dateAdded = date_Added;
 	}
 
@@ -96,6 +116,7 @@ public class Account implements Serializable {
 		this.email = email;
 	}
 
+
 	public String getFirst_Name() {
 		return this.fName;
 	}
@@ -104,21 +125,23 @@ public class Account implements Serializable {
 		this.fName = first_Name;
 	}
 
-	public boolean getIs_Admin() {
-		return this.admin;
+
+	public boolean getIsAdmin() {
+		return this.isAdmin;
 	}
 
 	public void setIs_Admin(boolean is_Admin) {
-		this.admin = is_Admin;
+		this.isAdmin = is_Admin;
 	}
 
-	public String getLast_Name() {
+	public String getLName() {
 		return this.lName;
 	}
 
-	public void setLast_Name(String last_Name) {
-		this.lName = last_Name;
+	public void setLName(String lName) {
+		this.lName = lName;
 	}
+
 
 	public String getPassword() {
 		return this.password;
@@ -128,20 +151,22 @@ public class Account implements Serializable {
 		this.password = password;
 	}
 
-	public String getUser_Name() {
-		return this.userName;
-	}
-
-	public void setUser_Name(String user_Name) {
-		this.userName = user_Name;
-	}
 
 	public String getPicture() {
-		return picture;
+		return this.picture;
 	}
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+
+	public String getUser_Name() {
+		return this.userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public List<Alcohol> getAlcohols() {

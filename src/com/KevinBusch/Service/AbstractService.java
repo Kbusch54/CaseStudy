@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
  *
  */
 public abstract class AbstractService {
-	protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CaseStudy");
+	protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory("case_study");
 	protected static EntityManager em = emf.createEntityManager();
 	
 	public AbstractService() {

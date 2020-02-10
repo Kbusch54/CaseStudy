@@ -17,14 +17,15 @@ public class Like implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
+	@Column(name="alcohol_Id")
 	private Long alcoholId;
+	
+	@Column(name="user_Id")
+	private Long userId;
 
+	@Column(name="comment_Id")
 	private Long commentId;
 
-	@Column(name = "id_Likes")
-	private Long idLikes;
-
-	private Long userId;
 
 	// bi-directional many-to-one association to Account
 	@ManyToOne
@@ -64,14 +65,6 @@ public class Like implements Serializable {
 
 	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
-	}
-
-	public Long getId_Likes() {
-		return this.idLikes;
-	}
-
-	public void setId_Likes(Long id_Likes) {
-		this.idLikes = id_Likes;
 	}
 
 	public Long getUserId() {

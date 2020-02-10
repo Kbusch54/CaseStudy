@@ -17,10 +17,12 @@ public class Star implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
+	@Column(name="ALCOHOL_ID")
 	private Long alcoholId;
 
 	private int number;
 
+	@Column(name="user_Id")
 	private Long userId;
 
 	// bi-directional many-to-one association to Account

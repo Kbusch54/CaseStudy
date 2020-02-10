@@ -9,7 +9,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "tags")
+@Table(name = "Tags")
 @NamedQuery(name = "findAllTags", query = "SELECT t FROM Tag t")
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +24,7 @@ public class Tag implements Serializable {
 	@ManyToMany
 	private List<Alcohol> alcohols;
 
+	
 	public Tag() {
 	}
 

@@ -10,7 +10,17 @@ import java.util.List;
  */
 @Entity
 @Table(name = "comments")
-@NamedQuery(name = "findAllComment", query = "SELECT c FROM Comment c")
+@NamedQueries(value = {
+		@NamedQuery(name = "findAllComment", query = "SELECT c FROM Comment c"),
+//		@NamedQuery(name = "CommentBox", 
+//		query = "SELECT c.text, l.id, s.number, acc.userName "
+//				+ "FROM Comment c "
+//				+ "left JOIN Like l on c.id = l.commentId "
+//				+ "left JOIN Account acc on c.userId = acc.id "
+//				+ "left JOIN Star s on acc.id = s.userId "
+//				+ "left JOIN Alcohol al on c.alcoholId=al.id "
+//				+ "Group by al.id") 
+		} )
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,10 +28,12 @@ public class Comment implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
+	@Column(name="alch_Id")
 	private Long alcoholId;
 
 	private String text;
 
+	@Column(name="user_Id")
 	private Long userId;
 
 	// bi-directional many-to-one association to Account

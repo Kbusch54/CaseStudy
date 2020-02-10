@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,8 @@ public class Alcohol implements Serializable {
 	private Long id;
 
 	private boolean approved;
-
+	
+	@Column(name="Category_Id")
 	private Long catId;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -43,7 +45,8 @@ public class Alcohol implements Serializable {
 	private String pic;
 
 	private String type;
-
+	
+	@Column(name="user_Id")
 	private Long userId;
 
 	// bi-directional many-to-one association to Account
@@ -70,9 +73,22 @@ public class Alcohol implements Serializable {
 	// bi-directional many-to-many association to Tag
 	@ManyToMany(mappedBy = "alcohols")
 	private List<Tag> tags;
-
+	
 	public Alcohol() {
 	}
+
+//	public Alcohol(Long catId, String description, String name, String pic, String type, Long userId,
+//			List<Tag> tags) {
+//		super();
+//		this.catId = catId;
+//		this.description = description;
+//		this.name = name;
+//		this.pic = pic;
+//		this.type = type;
+//		this.userId = userId;
+//		this.tags = tags;
+//	}
+
 
 	public Long getId() {
 		return this.id;
